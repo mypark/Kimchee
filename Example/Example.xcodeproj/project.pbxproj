@@ -393,6 +393,7 @@
 				27A0037E15A0ECD100B1ABD6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
