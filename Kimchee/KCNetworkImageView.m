@@ -42,7 +42,20 @@
             //NSLog(@"success");
             
             if (mpSelf)
+            {
                 [mpSelf removeSpinner];
+            
+                if (image.imageOrientation != UIImageOrientationUp)
+                {            
+                    image = [UIImage imageWithCGImage: image.CGImage
+                                                scale: 1
+                                          orientation: UIImageOrientationUp];
+                    [mpSelf setImage:image];
+                }
+                
+                
+            }
+
         } 
         failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) 
         {
@@ -70,14 +83,22 @@
     
      __weak KCNetworkImageView *mpSelf = self;
     
-    
-    //^UIImage *(UIImage *image) {[mpSelf setImage:image];} 
 
     AFImageRequestOperation* op = [AFImageRequestOperation imageRequestOperationWithRequest:request imageProcessingBlock:nil success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
         if (mpSelf)
         {
-            [mpSelf setImage:image];
             [mpSelf removeProgressBar];
+            
+            if (image.imageOrientation != UIImageOrientationUp)
+            {            
+                image = [UIImage imageWithCGImage: image.CGImage
+                                            scale: 1
+                                      orientation: UIImageOrientationUp];
+            }
+            
+            [mpSelf setImage:image];
+            
+
         }
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
         NSLog(@"error: %@", error);
